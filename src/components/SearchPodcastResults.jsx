@@ -1,25 +1,38 @@
 import React, { Component } from "react";
+import Podcast from "./Podcast";
 
 class SearchPodcastResults extends Component {
   constructor() {
     super();
-
-    this.renderResults = this.renderResults.bind(this);
+    this.renderLiked = this.renderLiked.bind(this);
   }
-  renderResults(key) {
-    const podcast = this.props.podcasts[key];
-    return (
-      <div key={key}>
-        <h2>{podcast.title}</h2><p>{podcast.description}</p>
-        <img src={podcast.scaled_logo_url} alt={podcast.title} />
-        <p>{podcast.url}</p>
-      </div>
-    );
+
+  renderLiked() {
+    debugger;
   }
 
   render() {
+    const podcastIds = Object.keys(this.props.podcasts);
     return (
-      <div>{Object.keys(this.props.podcasts).map(this.renderResults)}</div>
+      <div>
+        <div className="podcastResults">
+          {podcastIds.map(key =>
+            <Podcast
+              key={key}
+              id={key}
+              details={this.props.podcasts[key]}
+              likePodcast={this.props.likePodcast}
+            />
+          )}
+        </div>
+        <div className="liked">
+          {podcastIds
+            .filter(podcast => {
+              return podcast.liked === true;
+            })
+            .map(this.renderLiked)}
+        </div>
+      </div>
     );
   }
 }

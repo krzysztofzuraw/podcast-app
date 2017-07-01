@@ -9,6 +9,7 @@ class App extends Component {
   constructor() {
     super();
     this.addPodcast = this.addPodcast.bind(this);
+    this.likePodcast = this.likePodcast.bind(this);
   }
 
   state = {
@@ -19,6 +20,13 @@ class App extends Component {
     const podcasts = { ...this.state.podcasts };
     const timestamp = Date.now();
     podcasts[`podcast-${timestamp}`] = podcast;
+    podcasts[`podcast-${timestamp}`].liked = false;
+    this.setState({ podcasts });
+  }
+
+  likePodcast(podcastId) {
+    const podcasts = { ...this.state.podcasts };
+    podcasts[podcastId].liked = true;
     this.setState({ podcasts });
   }
 
@@ -36,7 +44,10 @@ class App extends Component {
             <Route
               path="/search/:title"
               render={props =>
-                <SearchPodcastResults podcasts={this.state.podcasts} />}
+                <SearchPodcastResults
+                  podcasts={this.state.podcasts}
+                  likePodcast={this.likePodcast}
+                />}
             />
 
           </Switch>

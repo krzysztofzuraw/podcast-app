@@ -7,9 +7,11 @@ class SearchPodcastForm extends Component {
     event.preventDefault();
     const encodedPodcastTitle = encodeURIComponent(this.refs.title.value);
     axios
-      .get(`https://gpodder.net/search.json?q=${encodedPodcastTitle}`)
+      .get(
+        `https://itunes.apple.com/search?term=${encodedPodcastTitle}&kind=podcast`
+      )
       .then(response => {
-        response.data.map(podcast => this.props.addPodcast(podcast));
+        response.data.results.map(podcast => this.props.addPodcast(podcast));
         this.props.history.push(`search/${encodedPodcastTitle}`);
       })
       .catch(error => {
