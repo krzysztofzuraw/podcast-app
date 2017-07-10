@@ -10,6 +10,7 @@ class App extends Component {
     super();
     this.addPodcast = this.addPodcast.bind(this);
     this.likePodcast = this.likePodcast.bind(this);
+    this.unlikePodcast = this.unlikePodcast.bind(this);
   }
 
   state = {
@@ -30,6 +31,12 @@ class App extends Component {
     this.setState({ podcasts });
   }
 
+  unlikePodcast(podcastId) {
+    const podcasts = { ...this.state.podcasts };
+    podcasts[podcastId].liked = false;
+    this.setState({ podcasts });
+  }
+
   render() {
     return (
       <div className="App">
@@ -47,6 +54,7 @@ class App extends Component {
                 <SearchPodcastResults
                   podcasts={this.state.podcasts}
                   likePodcast={this.likePodcast}
+                  unlikePodcast={this.unlikePodcast}
                 />}
             />
 

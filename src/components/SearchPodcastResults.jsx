@@ -7,8 +7,15 @@ class SearchPodcastResults extends Component {
     this.renderLiked = this.renderLiked.bind(this);
   }
 
-  renderLiked() {
-    debugger;
+  renderLiked(key) {
+    return (
+      <Podcast
+        key={key}
+        id={key}
+        details={this.props.podcasts[key]}
+        unlikePodcast={this.props.unlikePodcast}
+      />
+    );
   }
 
   render() {
@@ -27,10 +34,10 @@ class SearchPodcastResults extends Component {
         </div>
         <div className="liked">
           {podcastIds
-            .filter(podcast => {
-              return podcast.liked === true;
+            .filter(podcastId => {
+              return this.props.podcasts[podcastId].liked === true;
             })
-            .map(this.renderLiked)}
+            .map(key => this.renderLiked(key))}
         </div>
       </div>
     );

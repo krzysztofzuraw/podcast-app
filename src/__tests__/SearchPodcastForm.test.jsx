@@ -15,7 +15,7 @@ const component = mount(
 
 beforeAll(() => {
   const resolved = new Promise(r =>
-    r({ data: Array.from([{ 0: { description: "desc" } }]) })
+    r({ data: { results: [{ 0: { description: "desc" } }] } })
   );
   sinon.stub(axios, "get").returns(resolved);
   component.find("input").node.value = "This American Life";
