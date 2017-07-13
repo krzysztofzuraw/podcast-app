@@ -3,6 +3,11 @@ import PropTypes from "prop-types";
 import axios from "axios";
 
 class SearchPodcastForm extends Component {
+  constructor() {
+    super();
+    this.searchForPodcast = this.searchForPodcast.bind(this);
+  }
+
   searchForPodcast(event) {
     event.preventDefault();
     const encodedPodcastTitle = encodeURIComponent(this.refs.title.value);
@@ -11,6 +16,7 @@ class SearchPodcastForm extends Component {
         `https://itunes.apple.com/search?term=${encodedPodcastTitle}&kind=podcast`
       )
       .then(response => {
+        const { addPodcast } = this.props;
         response.data.results.map(podcast => this.props.addPodcast(podcast));
         this.props.history.push(`search/${encodedPodcastTitle}`);
       })

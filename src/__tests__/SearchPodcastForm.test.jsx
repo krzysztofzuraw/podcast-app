@@ -4,27 +4,53 @@ import SearchPodcastForm from "../components/SearchPodcastForm";
 import sinon from "sinon";
 import axios from "axios";
 
-jest.mock("react-router");
+describe("SearchPodcastForm Component", () => {
+  let component;
 
-const addPodcastMock = jest.fn();
-const history = jest.mock();
-history.push = jest.fn();
-const component = mount(
-  <SearchPodcastForm addPodcast={addPodcastMock} history={history} />
-);
+  const addPodcastMock = jest.fn();
+  const props = {
+    history: {
+      push: jest.fn()
+    },
+    addPodcast: addPodcastMock
+  };
 
-beforeAll(() => {
-  const resolved = new Promise(r =>
-    r({ data: { results: [{ 0: { description: "desc" } }] } })
-  );
-  sinon.stub(axios, "get").returns(resolved);
-  component.find("input").node.value = "This American Life";
-  component.find("form").simulate("submit", { preventDefault: jest.fn() });
-});
+  const responseData = {
+    data: {
+      results: [
+        {
+          0: {
+            description: "desc"
+          }
+        }
+      ]
+    }
+  };
 
-test("submitting form calls addPodcast", () => {
-  expect(addPodcastMock.mock.calls.length).toBe(1);
-  expect(addPodcastMock.mock.calls[0]).toEqual([
-    { 0: { description: "desc" } }
-  ]);
+  beforeAll(() => {
+    const resolved = new Promise(r => r(responseData));
+    sinon.stub(axios, "get").returns(resolved);
+    component = mount(<SearchPodcastForm {...props} />);
+  });
+
+  it("submitting form should call addPodcast", () => {
+    component.find("input").node.value = "This American Life";
+    component.find("form").simulate("submit", { preventDefault: jest.fn() });
+
+    setTimeout(() => {
+      try {
+        expect(addPodcastMock.mock.calls.length).toBe(1);
+        expect(addPodcastMock.mock.calls[0]).toEqual([
+          { 0: { description: "desc" } }
+        ]);
+      } catch (error) {
+        expect(error).toEqual("Testing asynchronous code fails");
+      }
+    });
+  });
+
+  it("should render search form", () => {
+    expect(component.find("form").exists()).toBe(true);
+    expect(component.find("form").hasClass("podcast-search")).toEqual(true);
+  });
 });
