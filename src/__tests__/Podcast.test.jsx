@@ -21,7 +21,7 @@ describe("Podcast Component", () => {
     unlikePodcast: unlikePodcastMock
   };
 
-  beforeEach(() => {
+  beforeAll(() => {
     component = shallow(<Podcast {...props} />);
   });
 
