@@ -1,0 +1,16 @@
+.podcast-search {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  text-align: center;
+}
+
+.podcast-search label {
+  font-size: 6rem;
+}
+
+.podcast-search button {
+  margin: 30px;
+}
