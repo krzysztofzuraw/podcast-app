@@ -13,9 +13,7 @@ class App extends Component {
     this.unlikePodcast = this.unlikePodcast.bind(this);
   }
 
-  state = {
-    podcasts: {}
-  };
+  state = {};
 
   addPodcast(podcast) {
     const podcasts = { ...this.state.podcasts };

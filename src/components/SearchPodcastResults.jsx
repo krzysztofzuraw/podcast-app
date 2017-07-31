@@ -24,7 +24,7 @@ class SearchPodcastResults extends Component {
     return (
       <Grid>
         <Row>
-          <Col xs={8} md={8} lg={8}>
+          <Col xs={6} md={6} lg={6}>
             <Panel header={<h3>Search Results</h3>} bsStyle="primary">
               <div className="podcastResults">
                 {podcastIds
@@ -42,7 +42,7 @@ class SearchPodcastResults extends Component {
               </div>
             </Panel>
           </Col>
-          <Col xs={4} md={4} lg={4}>
+          <Col xs={6} md={6} lg={6}>
             <Panel header={<h3>Your liked podcasts</h3>} bsStyle="success">
               <div className="liked">
                 {podcastIds

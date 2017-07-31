@@ -1,0 +1,20 @@
+.podcast-detail {
+  display: flex;
+}
+
+.podcast-detail > img {
+  flex: 1;
+  max-height: 100px;
+  max-width: 100px;
+  align-self: center;
+}
+
+.podcast-detail .caption {
+  flex: 2;
+  flex-direction: flex-end;
+  display: flex;
+}
+
+.podcast-detail .podcast-btn * {
+  margin: 5px;
+}

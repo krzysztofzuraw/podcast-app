@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import { Thumbnail, Button } from "react-bootstrap";
+
+import "./Podcast.css";
 
 export default class Podcast extends Component {
   constructor() {
@@ -9,21 +12,52 @@ export default class Podcast extends Component {
   renderButton(id, podcastDetails) {
     const { likePodcast, unlikePodcast } = this.props;
     if (podcastDetails.liked === true) {
-      return <button onClick={() => unlikePodcast(id)}>UnLike It!</button>;
+      return (
+        <Button
+          onClick={() => unlikePodcast(id)}
+          bsStyle="danger"
+          className="action-btn"
+        >
+          Unlike it!
+        </Button>
+      );
     } else {
-      return <button onClick={() => likePodcast(id)}>Like it!</button>;
+      return (
+        <Button
+          onClick={() => likePodcast(id)}
+          bsStyle="success"
+          className="action-btn"
+        >
+          Like it!
+        </Button>
+      );
     }
   }
 
   render() {
     const { id, details } = this.props;
     return (
-      <div key={id}>
-        <h2>{details.artistName}</h2>
-        <img src={details.artworkUrl100} alt={details.artistName} />
-        <p>{details.artistViewUrl}</p>
-        {this.renderButton(id, details)}
-      </div>
+      <Thumbnail
+        src={details.artworkUrl100}
+        alt={details.artistName}
+        className="podcast-detail"
+      >
+        <div key={id}>
+          <h2>{details.artistName}</h2>
+          <p>Country: {details.country}</p>
+          <p>Genre: {details.primaryGenreName}</p>
+          <p>Latest episode: {details.trackName}</p>
+          <div className="podcast-btn">
+            <Button className="feed-btn">
+              <a href={details.feedUrl}>Feed URL</a>
+            </Button>
+            <Button className="itunes-btn">
+              <a href={details.artistViewUrl}>iTunes Link</a>
+            </Button>
+            {this.renderButton(id, details)}
+          </div>
+        </div>
+      </Thumbnail>
     );
   }
 }
