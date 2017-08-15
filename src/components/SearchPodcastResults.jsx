@@ -13,43 +13,38 @@ class SearchPodcastResults extends Component {
       <Podcast
         key={key}
         id={key}
-        details={this.props.podcasts[key]}
+        details={this.props.liked[key]}
+        liked={true}
         unlikePodcast={this.props.unlikePodcast}
       />
     );
   }
 
   render() {
-    const podcastIds = Object.keys(this.props.podcasts);
+    const unlikedPodcastIds = Object.keys(this.props.unliked || {});
+    const likedPodcastIds = Object.keys(this.props.liked || {});
     return (
       <Grid>
         <Row>
           <Col xs={6} md={6} lg={6}>
             <Panel header={<h3>Search Results</h3>} bsStyle="primary">
               <div className="podcastResults">
-                {podcastIds
-                  .filter(key => {
-                    return this.props.podcasts[key].liked === false;
-                  })
-                  .map(key =>
-                    <Podcast
-                      key={key}
-                      id={key}
-                      details={this.props.podcasts[key]}
-                      likePodcast={this.props.likePodcast}
-                    />
-                  )}
+                {unlikedPodcastIds.map(key =>
+                  <Podcast
+                    key={key}
+                    id={key}
+                    details={this.props.unliked[key]}
+                    liked={false}
+                    likePodcast={this.props.likePodcast}
+                  />
+                )}
               </div>
             </Panel>
           </Col>
           <Col xs={6} md={6} lg={6}>
             <Panel header={<h3>Your liked podcasts</h3>} bsStyle="success">
               <div className="liked">
-                {podcastIds
-                  .filter(podcastId => {
-                    return this.props.podcasts[podcastId].liked === true;
-                  })
-                  .map(key => this.renderLiked(key))}
+                {likedPodcastIds.map(key => this.renderLiked(key))}
               </div>
             </Panel>
           </Col>
