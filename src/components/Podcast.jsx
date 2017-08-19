@@ -9,8 +9,8 @@ export default class Podcast extends Component {
     this.renderButton = this.renderButton.bind(this);
   }
 
-  renderButton(id, podcastDetails, liked) {
-    const { likePodcast, unlikePodcast } = this.props;
+  renderButton(id, podcastDetails) {
+    const { likePodcast, unlikePodcast, liked } = this.props;
     if (liked === true) {
       return (
         <Button
@@ -35,7 +35,7 @@ export default class Podcast extends Component {
   }
 
   render() {
-    const { id, details, liked } = this.props;
+    const { id, details } = this.props;
     return (
       <Thumbnail
         src={details.artworkUrl100}
@@ -54,7 +54,7 @@ export default class Podcast extends Component {
             <Button className="itunes-btn">
               <a href={details.artistViewUrl}>iTunes Link</a>
             </Button>
-            {this.renderButton(id, details, liked)}
+            {this.renderButton(id, details)}
           </div>
         </div>
       </Thumbnail>
