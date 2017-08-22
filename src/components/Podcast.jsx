@@ -11,7 +11,7 @@ export default class Podcast extends Component {
 
   renderButton(id, podcastDetails) {
     const { likePodcast, unlikePodcast, liked } = this.props;
-    if (liked === true) {
+    if (liked) {
       return (
         <Button
           onClick={() => unlikePodcast(id)}

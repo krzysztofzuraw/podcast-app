@@ -45,7 +45,7 @@ describe("Podcast Component", () => {
   });
 
   it("should execute unlikePodcast when button is clicked", () => {
-    props.details = { liked: true };
+    props = { ...props, liked: true };
     const component = shallow(<Podcast {...props} />);
     component.find(buttonClass).simulate("click");
     expect(unlikePodcastMock.mock.calls.length).toBe(1);
