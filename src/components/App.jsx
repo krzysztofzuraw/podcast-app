@@ -63,12 +63,12 @@ class App extends Component {
           <Switch>
             <Route
               exact
-              path="/"
+              path="/podcast-app/"
               render={props =>
                 <SearchPodcastForm addPodcast={this.addPodcast} {...props} />}
             />
             <Route
-              path="/search/:title"
+              path="/podcast-app/search/:title"
               render={props =>
                 <SearchPodcastResults
                   unliked={this.state.unliked}
