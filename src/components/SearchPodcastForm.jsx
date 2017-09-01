@@ -39,6 +39,7 @@ class SearchPodcastForm extends Component {
             inputRef={ref => {
               this.input = ref;
             }}
+            required
           />
           <Button type="submit" bsStyle="primary">Search</Button>
         </FormGroup>
