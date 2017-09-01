@@ -35,8 +35,7 @@ class App extends Component {
 
   addPodcast(podcast) {
     const unliked = { ...this.state.unliked };
-    const timestamp = Date.now();
-    unliked[`podcast-${timestamp}`] = podcast;
+    unliked[podcast.trackId] = podcast;
     this.setState({ unliked });
   }
 
@@ -63,12 +62,12 @@ class App extends Component {
           <Switch>
             <Route
               exact
-              path="/podcast-app/"
+              path="/"
               render={props =>
                 <SearchPodcastForm addPodcast={this.addPodcast} {...props} />}
             />
             <Route
-              path="/podcast-app/search/:title"
+              path="/search/:title"
               render={props =>
                 <SearchPodcastResults
                   unliked={this.state.unliked}

@@ -8,6 +8,10 @@ class SearchPodcastResults extends Component {
     this.renderLiked = this.renderLiked.bind(this);
   }
 
+  componentWillReceiveProps() {
+    debugger;
+  }
+
   renderLiked(key) {
     return (
       <Podcast
