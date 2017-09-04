@@ -64,6 +64,11 @@ describe("App Component", () => {
     component.instance().unlikePodcast(0);    
     expect(component.state('unliked')[0]).toEqual({
       description: "Second"
-    })
-  })
+    });
+  });
+
+  it('calling cleanUnlikedPodcasts should clean the unliked state', () => {
+    component.instance().cleanUnlikedPodcasts();
+    expect(component.state('unliked')).toEqual({});
+  });
 });

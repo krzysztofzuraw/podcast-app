@@ -12,7 +12,8 @@ describe("SearchPodcastForm Component", () => {
     history: {
       push: jest.fn()
     },
-    addPodcast: addPodcastMock
+    addPodcast: addPodcastMock,
+    cleanUnlikedPodcasts: jest.fn(),
   };
 
   const responseData = {

@@ -11,13 +11,14 @@ class App extends Component {
     this.addPodcast = this.addPodcast.bind(this);
     this.likePodcast = this.likePodcast.bind(this);
     this.unlikePodcast = this.unlikePodcast.bind(this);
+    this.cleanUnlikedPodcasts = this.cleanUnlikedPodcasts.bind(this);
   }
 
   state = {
     liked: {},
     unliked: {}
   };
-
+  
   componentWillMount() {
     const localStorageRef = localStorage.getItem("liked");
 
@@ -55,6 +56,10 @@ class App extends Component {
     this.setState({ liked, unliked });
   }
 
+  cleanUnlikedPodcasts() {
+    this.setState({ unliked: {}})
+  }
+
   render() {
     return (
       <div className="App">
@@ -64,7 +69,7 @@ class App extends Component {
               exact
               path="/"
               render={props =>
-                <SearchPodcastForm addPodcast={this.addPodcast} {...props} />}
+                <SearchPodcastForm addPodcast={this.addPodcast} {...props} cleanUnlikedPodcasts={this.cleanUnlikedPodcasts} />}
             />
             <Route
               path="/search/:title"

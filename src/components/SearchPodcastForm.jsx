@@ -6,9 +6,13 @@ import axios from "axios";
 import "./SearchPodcastForm.css";
 
 class SearchPodcastForm extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.searchForPodcast = this.searchForPodcast.bind(this);
+  }
+
+  componentWillMount() {
+    this.props.cleanUnlikedPodcasts();
   }
 
   searchForPodcast(event) {
@@ -49,7 +53,8 @@ class SearchPodcastForm extends Component {
 }
 
 SearchPodcastForm.propTypes = {
-  addPodcast: PropTypes.func.isRequired
+  addPodcast: PropTypes.func.isRequired,
+  cleanUnlikedPodcasts: PropTypes.func.isRequired,
 };
 
 export default SearchPodcastForm;
