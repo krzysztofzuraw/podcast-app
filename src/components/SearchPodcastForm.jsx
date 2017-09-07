@@ -11,12 +11,9 @@ class SearchPodcastForm extends Component {
     this.searchForPodcast = this.searchForPodcast.bind(this);
   }
 
-  componentWillMount() {
-    this.props.cleanUnlikedPodcasts();
-  }
-
   searchForPodcast(event) {
     event.preventDefault();
+    this.props.cleanUnlikedPodcasts();
     const encodedPodcastTitle = encodeURIComponent(this.input.value);
     axios
       .get(
